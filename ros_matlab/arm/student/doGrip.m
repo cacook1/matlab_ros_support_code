@@ -28,6 +28,10 @@ function [res,state] = doGrip(type,optns,doGripValue )
     end
 
     %% TODO: Pack gripper information intro ROS message
+    grip_client = rosactionclient('/gripper_controller/follow_joint_trajectory',...
+                              'control_msgs/FollowJointTrajectory', ...
+                              'DataFormat', 'struct');
+    gripGoal = rosmessage(grip_client);
 
 
     %% Pending: Check if fingers already at goal
@@ -38,12 +42,12 @@ function [res,state] = doGrip(type,optns,doGripValue )
     %% Send action goal
     disp('Sending grip goal...');
 
-    try waitForServer(r.grip_action_client,2)
+    try waitForServer(r.grip_action_client,2);
         disp('Connected to Grip server. Moving fingers...')
-        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,gripGoal);
     catch
         % Re-attempt
         disp('No server..? Trying again...');
-        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,gripGoal);
     end    
 end

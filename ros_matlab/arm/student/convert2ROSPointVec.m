@@ -23,7 +23,7 @@ function traj_goal = convert2ROSPointVec(mat_joint_traj, robot_joint_names, traj
     timeStep = traj_duration / traj_steps;
     
     % TODO: Set joint names. Note: must remove finger at index 2
-    traj_goal.Trajectory.JointNames = 
+    traj_goal.Trajectory.JointNames = {'robotiq_85_left_knuckle_joint'};
     
   
     %% Set Points

@@ -47,6 +47,7 @@ function [mat_joint_traj,robot_joint_names] = convertPoseTraj2JointTraj(mat_traj
     % Elbow Down a problem? Force elbow and w4 guesses:
     % mat_cur_q(3) = pi/2; mat_cur_q(4) = -pi/2;
 
+
     % 5. Go through trajectory loop
     % Check for time complexity. Can we improve efficiency.
     for i = 1:num_traj_points
