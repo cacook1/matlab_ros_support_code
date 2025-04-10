@@ -8,6 +8,7 @@ function [mat_joint_traj,robot_joint_names] = convertPoseTraj2JointTraj(mat_traj
     % 5. Loop through trajectory
     % 6. Extract solution w/ checks-- first one for right/elbow/down. 
     %
+    %
     % Input:
     % - mat_traj [] - array of 4 x 4 x n waypoints of homogeneous trasformation trajectories
     %

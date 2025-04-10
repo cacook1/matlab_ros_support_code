@@ -11,9 +11,9 @@ function resetWorld(optns)
     r = optns{'rHandle'};
     
     % TODO: 02 Create Empty Simulation message
-    reset_message = rosmessage(r.res_client);
+    res_req = rosmessage(r.res_client);
 
     % TODO: 03 Call reset service
     %rosservice type '/gazebo/reset_world'
-    call(r.res_client,reset_message);
+    call(r.res_client,res_req);
 end

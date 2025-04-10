@@ -28,10 +28,7 @@ function [res,state] = doGrip(type,optns,doGripValue )
     end
 
     %% TODO: Pack gripper information intro ROS message
-    grip_client = rosactionclient('/gripper_controller/follow_joint_trajectory',...
-                              'control_msgs/FollowJointTrajectory', ...
-                              'DataFormat', 'struct');
-    gripGoal = rosmessage(grip_client);
+    gripGoal = packGripGoal_struct(gripPos,grip_msg,optns);
 
 
     %% Pending: Check if fingers already at goal

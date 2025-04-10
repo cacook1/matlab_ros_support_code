@@ -11,9 +11,9 @@ function models = getModels(optns)
     r = optns{'rHandle'};
     
     % TODO: 02 Create model_client_msg 
-    get_models_message = rosmessage(r.get_models_client);
+    mod_req = rosmessage(r.get_models_client);
     
     % TODO: 03 Call client 
-    models = call(r.get_models_client,get_models_message);
+    models = call(r.get_models_client,mod_req);
 
 end
