@@ -1,4 +1,4 @@
-function [bboxes, scores, labels, numObjects, myImg, annotatedImage] = getLabeledImg(zone, optns)
+function [bboxes, scores, labels, numObjects, rgbImage, annotatedImage] = getLabeledImg(zone, optns)
 % ------------------------------------------------------------------------
 % Takes a picture by accessing a subscriber, loads the dector and labels
 % the image taken, and displays it.
@@ -26,7 +26,7 @@ function [bboxes, scores, labels, numObjects, myImg, annotatedImage] = getLabele
     disp("Taking picture...")
 
     rosImg  = receive(r.rgb_sub);
-    myImg   = rosReadImage(rosImg,"PreserveStructureOnRead",true);
+    rgbImage   = rosReadImage(rosImg,"PreserveStructureOnRead",true);
     
     %% Bounding Boxes
     disp("Computing bounding boxes, scores, and labels...")

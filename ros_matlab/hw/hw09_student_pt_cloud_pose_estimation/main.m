@@ -20,7 +20,7 @@
     
     % Create global dictionary. Passed to all functions. Includes robot handle
     keys   = ["debug", "toolFlag", "traj_steps", "z_offset", "traj_duration", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle"];
-    values = {      1,          0,            1,       0.09,               2,                     1,                    1,            0.165,         r};
+    values = {      1,          0,            1,       0.09,              10,                     1,                    1,            0.165,         r};
     
     % Instantiate the dictionary: values can be access via {}, i.e. optns{'key'}
     disp("Creating dictionary...");
@@ -45,10 +45,10 @@
     zoneInspect = ''; 
 
     % Get labeled images and metadata of the zone
-    [bboxes, ~, labeled, numOfObjects, myImg, annotatedImage] = getLabeledImg(zoneInspect,optns);
+    [bboxes, ~, labeled, numOfObjects, rgbImage, annotatedImage] = getLabeledImg(zoneInspect,optns);
     
     % Capture a point cloud of the zone
     [ptCloud_pic, nonPlane_pic, ptCloud_table, base_to_cam_pose, cam_to_base_pose] = getMergedPTC(zoneInspect,optns); 
     
     % Get the pose of each detected object
-    objectData = getObjectData(ptCloud_pic, nonPlane_pic, myImg, bboxes, numOfObjects, base_to_cam_pose, cam_to_base_pose, labeled);
+    objectData = getObjectData(ptCloud_pic, nonPlane_pic, rgbImage, bboxes, numOfObjects, base_to_cam_pose, cam_to_base_pose, labeled);

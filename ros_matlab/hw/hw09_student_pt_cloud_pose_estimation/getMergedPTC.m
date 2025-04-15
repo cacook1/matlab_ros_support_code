@@ -101,7 +101,7 @@ function [ptCloud_pic, nonPlane_pic, ptCloud_world, base_to_cam_pose, cam_to_bas
         [ptCloud_recent, ~, ~, ~] = messyGetPointCloud(optns);
 
         % c) TODO: Merge ptCloud_world and ptCloud_recent (world+above) with a grid step of 0.001 and output to ptCloud_world
-        ptCloud_world = pcmerge(ptCloud_initial, ptCloud_A, 0.001);
+        ptCloud_world = pcmerge(ptCloud_recent, ptCloud_world, 0.001);
 
         % d) Find relevant points from merged pt cloud
         indices = findPointsInROI(ptCloud_world,table_roi);
