@@ -44,7 +44,7 @@ function objectData = getObjectData(ptCloud_base, nonPlane_pic, rgbImage, bboxes
     ptCloud_tform_cam = pctransform(ptCloud_base, to_cam_tform);
 
     % TODO: Also do for non-plane specific points nonPlane_pic with tform_to_cam
-    nonPlane_tform_cam = pctransform(nonPlane_pic, to_cam_tform);
+    %nonPlane_tform_cam = select(ptCloud_pic, nonPlaneidx);
     
     %% 02 Estimate object pose wrt to base
     disp("Finding object pose with respect to base_link...")
@@ -57,7 +57,6 @@ function objectData = getObjectData(ptCloud_base, nonPlane_pic, rgbImage, bboxes
 
     % If using merged point clouds:
     [xyz,theta,ptCloud_vec,scene_pca_vec] = betterObjectPoses(ptCloud_tform_cam, ...    % all points wrt to base
-                                                              nonPlane_tform_cam, ...   % non plane points wrt to base
                                                               rgbImage, ...                % rgb image
                                                               bboxes, ...               % yolo bounding boxes
                                                               gridDownsample, ...       % downsample factor
