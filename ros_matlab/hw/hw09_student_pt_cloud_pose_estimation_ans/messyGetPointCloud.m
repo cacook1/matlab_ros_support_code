@@ -6,7 +6,7 @@ function [ptCloud_tform, ptCloud, base_to_cam_pose, cam_to_base_pose] = messyGet
     %% Get point cloud
     disp("Creating point cloud...")
     ds = r.pt_cloud_sub;
-    pc = receive(ds,2);
+    pc = receive(ds);
 
     % Extract xyz points
     xyz = rosReadXYZ(pc,"PreserveStructureOnRead",true);
@@ -73,10 +73,11 @@ function [ptCloud_tform, ptCloud, base_to_cam_pose, cam_to_base_pose] = messyGet
 
     disp("Plotting point cloud with respect to base_link...")
     
-    planeThickness = .001;
+    planeThickness = .005;
     normalVector = [0,0,1];
     maxPlaneTilt = 5;
-    [param_tpc, planeIdx_tpc, nonPlaneIdx_tpc] = pcfitplane(ptCloud_tform, planeThickness, normalVector, maxPlaneTilt);
+    [param_tpc, planeIdx_tpc, nonPlaneIdx_tpc] = pcfitplane(ptCloud_tform, planeThickness, normalVector, maxPlaneTilt,'MaxNumTrials',5000);
+    %[model,inliers,outliers] = pcfitplane(ptCloud, planeThickness, normalVector, maxPlaneTilt, 'MaxNumTrials',5000);
     plane_tpc = select(ptCloud_tform, planeIdx_tpc);
     nonPlane_tpc = select(ptCloud_tform, nonPlaneIdx_tpc);
 
